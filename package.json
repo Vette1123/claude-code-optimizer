@@ -1,0 +1,16 @@
+{
+  "name": "claude-code-optimizer",
+  "version": "1.0.0",
+  "description": "Make your Claude Code usage limit last longer and stop it saturating slow internet uploads: compaction handoffs, image-shrink hooks, on-demand MCP, usage report. One idempotent installer.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Mohamed Gado",
+  "repository": "github:Vette1123/claude-code-optimizer",
+  "keywords": ["claude-code", "claude", "anthropic", "usage-limit", "token-optimization", "context-window", "hooks", "auto-compact", "mcp", "ai-coding", "slow-internet"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test install.test.mjs files/",
+    "install:dry": "node install.mjs --dry-run",
+    "apply": "node install.mjs"
+  }
+}
