@@ -78,7 +78,8 @@ async function main() {
   const input = JSON.parse(raw);
   const scaled = chromeScreenshotInput(input.tool_name, input.tool_input);
   if (scaled) {
-    process.stdout.write(JSON.stringify({ hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'allow', updatedInput: scaled } }));
+    process.stdout.write(JSON.stringify({ hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'allow', updatedInput: scaled,
+      additionalContext: `Screenshot scaled to ${CHROME_SCALE} for viewing only. If it will be uploaded or shared (upload_image, a PR, Slack, a ticket), retake it with scale: 1.` } }));
     return;
   }
   const file = input.tool_input?.file_path;
@@ -91,7 +92,7 @@ async function main() {
       hookEventName: 'PreToolUse',
       permissionDecision: 'allow',
       updatedInput: { ...input.tool_input, file_path: out },
-      additionalContext: `Image re-encoded as JPEG, long edge capped at ${MAX_EDGE}px, to save context and upload (original: ${file}). Set CLAUDE_FULL_IMAGES=1 for full size.`,
+      additionalContext: `Image re-encoded as JPEG, long edge capped at ${MAX_EDGE}px, to save context and upload (original: ${file}). This copy is for viewing only: anything uploaded or shared (a PR, Slack, a ticket, a store listing) uses the original path at full quality. Set CLAUDE_FULL_IMAGES=1 for full size.`,
     },
   }));
 }

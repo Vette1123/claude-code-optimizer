@@ -21,7 +21,7 @@ Images are the second problem. Every turn re-uploads them as part of the convers
 
 | Piece | What it does |
 |---|---|
-| `shrink-image-read.mjs` (PreToolUse) | Re-encodes screenshots Claude reads as JPEG with a 1200px long edge. A phone capture goes from 749 KB to 84 KB. It also sets `scale: 0.6` on Claude in Chrome screenshots. Paths under `marketing/`, `store/` or `brand/` stay full size. |
+| `shrink-image-read.mjs` (PreToolUse) | Re-encodes screenshots Claude reads as JPEG with a 1200px long edge. A phone capture goes from 749 KB to 84 KB. It also sets `scale: 0.6` on Claude in Chrome screenshots. Paths under `marketing/`, `store/` or `brand/` stay full size. The original file is never changed: the smaller copy is only what Claude views, and anything uploaded or shared uses the original at full quality (a Chrome screenshot meant for upload is retaken at `scale: 1`). |
 | `compact-handoff.mjs` (PreCompact, PostCompact, SessionStart) | Makes auto-compaction write a real handoff (goal, done, next step, what's running), saves it to `~/.claude/state/handoffs/`, and points a new session in the same folder at the newest one. |
 | `explore-nudge.mjs` (PreToolUse) | After 12 read-only tool calls in a row, it reminds the main session to hand the search to one cheaper subagent and keep only the finding. |
 | `usage-report.mjs` | Shows where the limit went: tokens per day, per model and per session, plus context per turn. `node ~/.claude/usage-report.mjs --days 7` |
